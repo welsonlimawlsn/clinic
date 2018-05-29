@@ -7,18 +7,18 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Result extends AbstractEntity {
     @ManyToOne
-    private Marking marking;
+    private Exam exam;
     @Column(nullable = false)
     private String key;
     @Column(nullable = false)
     private String value;
 
-    public Marking getMarking() {
-        return marking;
+    public Exam getExam() {
+        return exam;
     }
 
-    public void setMarking(Marking marking) {
-        this.marking = marking;
+    public void setExam(Exam exam) {
+        this.exam = exam;
     }
 
     public String getKey() {

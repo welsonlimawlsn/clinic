@@ -16,8 +16,6 @@ public class Marking extends AbstractEntity {
     private Secretary secretary;
     @Column(nullable = false)
     private LocalDateTime dateTime;
-    @ManyToOne
-    private Exam exam;
     @Column(nullable = false)
     private Boolean completed = false;
 
@@ -51,14 +49,6 @@ public class Marking extends AbstractEntity {
 
     public void setDateTime(LocalDateTime dateTime) {
         this.dateTime = dateTime;
-    }
-
-    public Exam getExam() {
-        return exam;
-    }
-
-    public void setExam(Exam exam) {
-        this.exam = exam;
     }
 
     public Boolean getCompleted() {
