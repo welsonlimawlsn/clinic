@@ -9,9 +9,9 @@ public class Result extends AbstractEntity {
     @ManyToOne
     private Exam exam;
     @Column(nullable = false)
-    private String key;
+    private String name;
     @Column(nullable = false)
-    private String value;
+    private String result;
 
     public Exam getExam() {
         return exam;
@@ -21,19 +21,19 @@ public class Result extends AbstractEntity {
         this.exam = exam;
     }
 
-    public String getKey() {
-        return key;
+    public String getName() {
+        return name;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getValue() {
-        return value;
+    public String getResult() {
+        return result;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setResult(String result) {
+        this.result = result;
     }
 }

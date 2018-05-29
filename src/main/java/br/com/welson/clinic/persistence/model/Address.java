@@ -2,9 +2,10 @@ package br.com.welson.clinic.persistence.model;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import java.io.Serializable;
 
 @Embeddable
-public class Address {
+public class Address implements Serializable {
 
     @Column(nullable = false)
     private String address;

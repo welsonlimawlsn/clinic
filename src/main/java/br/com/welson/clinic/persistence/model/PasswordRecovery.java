@@ -9,18 +9,18 @@ import java.time.LocalDateTime;
 public class PasswordRecovery extends AbstractEntity {
 
     @Column(nullable = false)
-    private String key;
+    private String uniqueKey;
     @ManyToOne(optional = false)
     private ApplicationUser applicationUser;
     @Column(nullable = false)
     private LocalDateTime expiration;
 
-    public String getKey() {
-        return key;
+    public String getUniqueKey() {
+        return uniqueKey;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setUniqueKey(String uniqueKey) {
+        this.uniqueKey = uniqueKey;
     }
 
     public ApplicationUser getApplicationUser() {

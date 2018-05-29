@@ -1,5 +1,6 @@
 package br.com.welson.clinic.persistence.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
@@ -13,11 +14,11 @@ public class ApplicationUser extends AbstractEntity {
     private String password;
     @Column(nullable = false, unique = true)
     private String email;
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.PERSIST})
     private Doctor doctor;
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.PERSIST})
     private Secretary secretary;
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.PERSIST})
     private Patient patient;
 
     public String getUsername() {
