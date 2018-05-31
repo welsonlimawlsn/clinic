@@ -15,4 +15,48 @@
     <welcome-file-list>
         <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
+    <context-param>
+        <param-name>javax.faces.SEPARATOR_CHAR</param-name>
+        <param-value>-</param-value>
+    </context-param>
+    <context-param>
+        <param-name>javax.faces.FACELETS_SKIP_COMMENTS</param-name>
+        <param-value>true</param-value>
+    </context-param>
+
+    <filter>
+        <filter-name>AdminLoginFilter</filter-name>
+        <filter-class>br.com.welson.clinic.filter.AdminLoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AdminLoginFilter</filter-name>
+        <url-pattern>/restricted/admin/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>DoctorLoginFilter</filter-name>
+        <filter-class>br.com.welson.clinic.filter.DoctorLoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>DoctorLoginFilter</filter-name>
+        <url-pattern>/restricted/doctor/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>EmployeeLoginFilter</filter-name>
+        <filter-class>br.com.welson.clinic.filter.EmployeeLoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>EmployeeLoginFilter</filter-name>
+        <url-pattern>/restricted/employee/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>PatientLoginFilter</filter-name>
+        <filter-class>br.com.welson.clinic.filter.PatientLoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>PatientLoginFilter</filter-name>
+        <url-pattern>/restricted/patient/*</url-pattern>
+    </filter-mapping>
 </web-app>

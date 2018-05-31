@@ -14,4 +14,6 @@ public interface DAO<T> extends Serializable {
     void delete(T entity);
 
     List<T> listAll();
+
+    List<T> findByHQLQuery(int maxResults, String queryId, Object... values);
 }

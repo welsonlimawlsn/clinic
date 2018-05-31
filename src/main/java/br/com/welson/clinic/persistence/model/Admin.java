@@ -1,20 +1,13 @@
 package br.com.welson.clinic.persistence.model;
 
-import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 
 @Entity
-public class Secretary extends AbstractEntity {
+public class Admin extends AbstractEntity {
 
-    @Column(nullable = false)
     private String name;
-    @Column(nullable = false, unique = true)
     private String CPF;
-    @Column(nullable = false)
     private String phone;
-    @Embedded
-    private Address address;
 
     public String getName() {
         return name;
@@ -38,13 +31,5 @@ public class Secretary extends AbstractEntity {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
     }
 }

@@ -13,7 +13,7 @@ public class Marking extends AbstractEntity {
     @ManyToOne(optional = false)
     private Doctor doctor;
     @ManyToOne
-    private Secretary secretary;
+    private Employee employee;
     @Column(nullable = false)
     private LocalDateTime dateTime;
     @Column(nullable = false)
@@ -35,12 +35,12 @@ public class Marking extends AbstractEntity {
         this.doctor = doctor;
     }
 
-    public Secretary getSecretary() {
-        return secretary;
+    public Employee getEmployee() {
+        return employee;
     }
 
-    public void setSecretary(Secretary secretary) {
-        this.secretary = secretary;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
     public LocalDateTime getDateTime() {

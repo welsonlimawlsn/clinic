@@ -17,9 +17,11 @@ public class ApplicationUser extends AbstractEntity {
     @OneToOne(cascade = {CascadeType.PERSIST})
     private Doctor doctor;
     @OneToOne(cascade = {CascadeType.PERSIST})
-    private Secretary secretary;
+    private Employee employee;
     @OneToOne(cascade = {CascadeType.PERSIST})
     private Patient patient;
+    @OneToOne(cascade = {CascadeType.PERSIST})
+    private Admin admin;
 
     public String getUsername() {
         return username;
@@ -53,12 +55,12 @@ public class ApplicationUser extends AbstractEntity {
         this.doctor = doctor;
     }
 
-    public Secretary getSecretary() {
-        return secretary;
+    public Employee getEmployee() {
+        return employee;
     }
 
-    public void setSecretary(Secretary secretary) {
-        this.secretary = secretary;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
     public Patient getPatient() {
@@ -67,5 +69,13 @@ public class ApplicationUser extends AbstractEntity {
 
     public void setPatient(Patient patient) {
         this.patient = patient;
+    }
+
+    public Admin getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
     }
 }
