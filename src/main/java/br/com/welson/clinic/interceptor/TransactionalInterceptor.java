@@ -8,10 +8,11 @@ import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import java.io.Serializable;
 
 @Interceptor
 @Transactional
-public class TransactionalInterceptor {
+public class TransactionalInterceptor implements Serializable {
 
     @Inject
     private EntityManager entityManager;

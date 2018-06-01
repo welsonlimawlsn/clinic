@@ -10,11 +10,11 @@ public class FacesUtil {
     }
 
     public static void addInfoMessage(String keyOrMessage, boolean isKey) {
-        addMessage(FacesMessage.SEVERITY_INFO, getBundleValue(isKey ? getBundleValue(keyOrMessage) : keyOrMessage));
+        addMessage(FacesMessage.SEVERITY_INFO, isKey ? getBundleValue(keyOrMessage) : keyOrMessage);
     }
 
     public static void addWarningMessage(String keyOrMessage, boolean isKey) {
-        addMessage(FacesMessage.SEVERITY_WARN, getBundleValue(isKey ? getBundleValue(keyOrMessage) : keyOrMessage));
+        addMessage(FacesMessage.SEVERITY_WARN, isKey ? getBundleValue(keyOrMessage) : keyOrMessage);
     }
 
     public static void addErrorMessage(String message) {
@@ -36,7 +36,7 @@ public class FacesUtil {
         FacesContext.getCurrentInstance().addMessage(null, facesMessage);
     }
 
-    private static String getBundleValue(String key) {
+    public static String getBundleValue(String key) {
         return FacesContext.getCurrentInstance().getApplication().getResourceBundle(FacesContext.getCurrentInstance(), "m").getString(key);
     }
 }

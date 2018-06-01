@@ -1,17 +1,22 @@
 package br.com.welson.clinic.ejb;
 
 import javax.annotation.Resource;
+import javax.ejb.Asynchronous;
 import javax.ejb.Stateless;
-import javax.mail.*;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 @Stateless
-public class EmailBean {
+public class EmailEJB {
 
     @Resource(name = "java:jboss/mail/Gmail")
     private Session session;
 
+    @Asynchronous
     public void send(String to, String subject, String body) {
         try {
             Message message = new MimeMessage(session);
