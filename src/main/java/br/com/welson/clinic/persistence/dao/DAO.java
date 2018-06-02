@@ -1,9 +1,11 @@
 package br.com.welson.clinic.persistence.dao;
 
+import br.com.welson.clinic.persistence.model.AbstractEntity;
+
 import java.io.Serializable;
 import java.util.List;
 
-public interface DAO<T> extends Serializable {
+public interface DAO<T extends AbstractEntity> extends Serializable {
 
     T save(T entity);
 

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <queries>
-    <query id="searchApplicationUserByMail">SELECT au FROM ApplicationUser au WHERE email = :email</query>
+    <query id="searchApplicationUserByMail">SELECT au FROM ApplicationUser au WHERE email = :email AND enabled = true</query>
     <query id="searchPasswordRecoveryByKey">SELECT pr FROM PasswordRecovery pr WHERE uniqueKey = :uniqueKey AND enabled = true</query>
-    <query id="searchActivateAccountByApplicationUser">SELECT ac FROM ActivateAccount ac WHERE applicationUser = :applicationUser</query>
-    <query id="searchActivateAccountByKey">SELECT ac FROM ActivateAccount ac WHERE uniqueKey = :uniqueKey</query>
+    <query id="searchActivateAccountByApplicationUser">SELECT ac FROM ActivateAccount ac WHERE applicationUser = :applicationUser AND enabled = true</query>
+    <query id="searchActivateAccountByKey">SELECT ac FROM ActivateAccount ac WHERE uniqueKey = :uniqueKey AND enabled = true</query>
+    <query id="searchApplicationUserByUsernameAndPassword">SELECT au FROM ApplicationUser au WHERE username = :username AND password = :password AND enabled = true</query>
 </queries>

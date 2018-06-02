@@ -24,10 +24,9 @@ public class CreateApplicationUserBean implements Serializable {
     @EJB
     private ActivateAccountEJB activateAccountEJB;
 
-    public void init() {
+    public void initAdmin() {
         applicationUser = new ApplicationUser();
         applicationUser.setAdmin(new Admin());
-        applicationUser.setEnabled(false);
     }
 
     public ApplicationUser getApplicationUser() {
@@ -44,14 +43,5 @@ public class CreateApplicationUserBean implements Serializable {
         applicationUser.setPassword(CryptographyUtil.encodePassword(applicationUser.getUsername(), applicationUser.getPassword()));
         applicationUser = applicationUserDAO.save(applicationUser);
         activateAccountEJB.createActivateAccount(applicationUser);
-    }
-
-    private void configInitialAdmin() {
-        applicationUser.setUsername("admin");
-        applicationUser.setPassword("admin");
-        applicationUser.setEmail("admin@gmail.com");
-        applicationUser.getAdmin().setName("Welson");
-        applicationUser.getAdmin().setCPF("admin");
-        applicationUser.getAdmin().setPhone("admin");
     }
 }

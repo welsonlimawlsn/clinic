@@ -1,5 +1,6 @@
 package br.com.welson.clinic.persistence.dao;
 
+import br.com.welson.clinic.persistence.model.AbstractEntity;
 import br.com.welson.clinic.utils.FileXMLService;
 
 import javax.persistence.EntityManager;
@@ -9,7 +10,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class DAOImp<T> implements DAO<T> {
+public class DAOImp<T extends AbstractEntity> implements DAO<T> {
 
     private EntityManager entityManager;
     private Class<T> classType;
@@ -38,17 +39,23 @@ public class DAOImp<T> implements DAO<T> {
 
     @Override
     public T getById(Long id) {
-        return entityManager.find(classType, id);
+        TypedQuery<T> query = entityManager.createQuery("SELECT e FROM " + classType.getSimpleName() + " e WHERE e.id = :id AND e.enabled = true", classType);
+        query.setParameter("id", id);
+        List<T> resultList = query.getResultList();
+        if (resultList.size() == 1)
+            return resultList.get(0);
+        return null;
     }
 
     @Override
     public void delete(T entity) {
-        entityManager.remove(entity);
+        entity.setEnabled(false);
+        entityManager.merge(entity);
     }
 
     @Override
     public List<T> listAll() {
-        return entityManager.createQuery("SELECT e FROM " + classType.getSimpleName() + " e", classType).getResultList();
+        return entityManager.createQuery("SELECT e FROM " + classType.getSimpleName() + " e WHERE e.enabled = true", classType).getResultList();
     }
 
     @Override

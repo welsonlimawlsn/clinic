@@ -1,5 +1,7 @@
 package br.com.welson.clinic.persistence.dao;
 
+import br.com.welson.clinic.persistence.model.AbstractEntity;
+
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
@@ -16,7 +18,7 @@ public class DAOFactory {
     @SuppressWarnings("unchecked")
     @Dependent
     @Produces
-    public <T> DAO<T> getDAO(InjectionPoint injectionPoint) {
+    public <T extends AbstractEntity> DAO<T> getDAO(InjectionPoint injectionPoint) {
         ParameterizedType parameterizedType = (ParameterizedType) injectionPoint.getType();
         Class classType = (Class) parameterizedType.getActualTypeArguments()[0];
         return new DAOImp<>(entityManager, classType);

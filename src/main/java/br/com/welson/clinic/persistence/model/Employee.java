@@ -3,6 +3,7 @@ package br.com.welson.clinic.persistence.model;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Employee extends AbstractEntity {
@@ -15,6 +16,8 @@ public class Employee extends AbstractEntity {
     private String phone;
     @Embedded
     private Address address;
+    @ManyToOne(optional = false)
+    private Clinic clinic;
 
     public String getName() {
         return name;
@@ -46,5 +49,13 @@ public class Employee extends AbstractEntity {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public Clinic getClinic() {
+        return clinic;
+    }
+
+    public void setClinic(Clinic clinic) {
+        this.clinic = clinic;
     }
 }
