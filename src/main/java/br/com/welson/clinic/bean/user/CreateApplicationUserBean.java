@@ -7,8 +7,11 @@ import br.com.welson.clinic.persistence.dao.DAO;
 import br.com.welson.clinic.persistence.model.Admin;
 import br.com.welson.clinic.persistence.model.ApplicationUser;
 import br.com.welson.clinic.utils.CryptographyUtil;
+import br.com.welson.clinic.utils.FacesUtil;
 
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.validator.ValidatorException;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -23,6 +26,7 @@ public class CreateApplicationUserBean implements Serializable {
     private DAO<ApplicationUser> applicationUserDAO;
     @EJB
     private ActivateAccountEJB activateAccountEJB;
+    private String confirmationPassword;
 
     public void initAdmin() {
         applicationUser = new ApplicationUser();
@@ -37,11 +41,28 @@ public class CreateApplicationUserBean implements Serializable {
         this.applicationUser = applicationUser;
     }
 
+    public String getConfirmationPassword() {
+        return confirmationPassword;
+    }
+
+    public void setConfirmationPassword(String confirmationPassword) {
+        this.confirmationPassword = confirmationPassword;
+    }
+
     @Transactional
     @ExceptionHandler
-    public void save() {
+    public String save() {
+        verifyPassword();
         applicationUser.setPassword(CryptographyUtil.encodePassword(applicationUser.getUsername(), applicationUser.getPassword()));
         applicationUser = applicationUserDAO.save(applicationUser);
         activateAccountEJB.createActivateAccount(applicationUser);
+        FacesUtil.addInfoMessage("Usuário adicionado com sucesso!");
+        return "create?faces-redirect=true";
+    }
+
+    private void verifyPassword() {
+        if (!confirmationPassword.equals(applicationUser.getPassword())) {
+            throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "As senhas não se coincidem", ""));
+        }
     }
 }
