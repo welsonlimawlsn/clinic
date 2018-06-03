@@ -53,7 +53,7 @@ public class CreateApplicationUserBean implements Serializable {
     @ExceptionHandler
     public String save() {
         verifyPassword();
-        applicationUser.setPassword(CryptographyUtil.encodePassword(applicationUser.getUsername(), applicationUser.getPassword()));
+        encryptPassword();
         applicationUser = applicationUserDAO.save(applicationUser);
         activateAccountEJB.createActivateAccount(applicationUser);
         FacesUtil.addInfoMessage("Usuário adicionado com sucesso!");
@@ -64,5 +64,9 @@ public class CreateApplicationUserBean implements Serializable {
         if (!confirmationPassword.equals(applicationUser.getPassword())) {
             throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "As senhas não se coincidem", ""));
         }
+    }
+
+    private void encryptPassword() {
+        applicationUser.setPassword(CryptographyUtil.encodePassword(applicationUser.getUsername(), applicationUser.getPassword()));
     }
 }
