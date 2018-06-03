@@ -14,13 +14,13 @@ public class ApplicationUser extends AbstractEntity {
     private String password;
     @Column(nullable = false, unique = true)
     private String email;
-    @OneToOne(cascade = {CascadeType.PERSIST})
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Doctor doctor;
-    @OneToOne(cascade = {CascadeType.PERSIST})
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Employee employee;
-    @OneToOne(cascade = {CascadeType.PERSIST})
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Patient patient;
-    @OneToOne(cascade = {CascadeType.PERSIST})
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Admin admin;
 
     public String getUsername() {

@@ -57,7 +57,7 @@ public class CreateApplicationUserBean implements Serializable {
         applicationUser = applicationUserDAO.save(applicationUser);
         activateAccountEJB.createActivateAccount(applicationUser);
         FacesUtil.addInfoMessage("Usuário adicionado com sucesso!");
-        return "create?faces-redirect=true";
+        return "save?faces-redirect=true";
     }
 
     private void verifyPassword() {

@@ -19,6 +19,8 @@ public class Address implements Serializable {
     private String zipCode;
     @Column(nullable = false)
     private String state;
+    @Column(nullable = false)
+    private String complement;
 
     public String getAddress() {
         return address;
@@ -66,5 +68,13 @@ public class Address implements Serializable {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public String getComplement() {
+        return complement;
+    }
+
+    public void setComplement(String complement) {
+        this.complement = complement;
     }
 }
