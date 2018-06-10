@@ -45,15 +45,13 @@ public class Validators {
         int sum = 0;
         int end = start == 5 ? 11 : 12;
         for (int i = 0; i <= end; i++) {
-            int n1 = getNumericValue(cnpj[i]);
-            int n2 = start;
             sum += getNumericValue(cnpj[i]) * start--;
             if (start == 1) {
                 start = 9;
             }
         }
-        int number = 11 - (sum % 11);
-        return number;
+        int remainder = sum % 11;
+        return remainder < 2 ? 0 : 11 - remainder;
     }
 
     private int getDigitCpf(char[] cpf, int amount) {

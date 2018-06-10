@@ -6,4 +6,5 @@
     <query id="searchActivateAccountByApplicationUser">SELECT ac FROM ActivateAccount ac WHERE applicationUser = :applicationUser AND enabled = true</query>
     <query id="searchActivateAccountByKey">SELECT ac FROM ActivateAccount ac WHERE uniqueKey = :uniqueKey AND enabled = true</query>
     <query id="searchApplicationUserByUsernameAndPassword">SELECT au FROM ApplicationUser au WHERE username = :username AND password = :password AND enabled = true</query>
+    <query id="searchClinicByName">SELECT c FROM Clinic c WHERE name LIKE :name AND enabled = true</query>
 </queries>

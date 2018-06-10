@@ -24,6 +24,11 @@
         <param-value>true</param-value>
     </context-param>
 
+    <error-page>
+        <error-code>404</error-code>
+        <location>/404.xhtml</location>
+    </error-page>
+
     <filter>
         <filter-name>AdminLoginFilter</filter-name>
         <filter-class>br.com.welson.clinic.filter.AdminLoginFilter</filter-class>

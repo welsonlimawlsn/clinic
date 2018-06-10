@@ -1,0 +1,51 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:g="http://java.sun.com/jsf/html"
+                template="/WEB-INF/templates/admin.xhtml"
+>
+    <ui:define name="content">
+        <f:metadata>
+            <f:viewAction action="#{listClinicBean.init}"/>
+        </f:metadata>
+        <h:form>
+            <div class="row" style="margin: 10px;">
+                <div class="col">
+                    <h:inputText styleClass="form-control" value="#{listClinicBean.searchField}"/>
+                </div>
+                <div class="col">
+                    <h:commandButton value="Pesquisar" styleClass="btn btn-primary" actionListener="#{listClinicBean.search}"/>
+                </div>
+            </div>
+        </h:form>
+        <h:dataTable styleClass="table table-striped" value="#{listClinicBean.clinics}" var="clinic">
+            <h:column>
+                <f:facet name="header">
+                    #
+                </f:facet>
+                <h:outputText value="#{clinic.id}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    Nome
+                </f:facet>
+                <h:link outcome="detail.xhtml" value="#{clinic.name}">
+                    <f:param name="id" value="#{clinic.id}"/>
+                </h:link>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    Telefone
+                </f:facet>
+                <h:outputText value="#{clinic.phone}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    E-mail
+                </f:facet>
+                <h:outputText value="#{clinic.email}"/>
+            </h:column>
+        </h:dataTable>
+    </ui:define>
+</ui:composition>
