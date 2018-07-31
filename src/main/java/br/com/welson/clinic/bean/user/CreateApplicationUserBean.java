@@ -3,11 +3,10 @@ package br.com.welson.clinic.bean.user;
 import br.com.welson.clinic.annotation.ExceptionHandler;
 import br.com.welson.clinic.annotation.Transactional;
 import br.com.welson.clinic.ejb.ActivateAccountEJB;
+import br.com.welson.clinic.ejb.CepEJB;
 import br.com.welson.clinic.persistence.dao.DAO;
-import br.com.welson.clinic.persistence.model.Admin;
-import br.com.welson.clinic.persistence.model.ApplicationUser;
-import br.com.welson.clinic.persistence.model.Clinic;
-import br.com.welson.clinic.persistence.model.Doctor;
+import br.com.welson.clinic.persistence.model.*;
+import br.com.welson.clinic.utils.AddressUtils;
 import br.com.welson.clinic.utils.CryptographyUtil;
 import br.com.welson.clinic.utils.FacesUtil;
 
@@ -29,6 +28,8 @@ public class CreateApplicationUserBean implements Serializable {
     @EJB
     private ActivateAccountEJB activateAccountEJB;
     private String confirmationPassword;
+    @EJB
+    private CepEJB cepEJB;
 
     public void initAdmin() {
         applicationUser = new ApplicationUser();
@@ -38,6 +39,12 @@ public class CreateApplicationUserBean implements Serializable {
     public void initDoctor() {
         applicationUser = new ApplicationUser();
         applicationUser.setDoctor(new Doctor());
+    }
+
+    public void initEmployee() {
+        applicationUser = new ApplicationUser();
+        applicationUser.setEmployee(new Employee());
+        applicationUser.getEmployee().setAddress(new Address());
     }
 
     public ApplicationUser getApplicationUser() {
@@ -63,8 +70,19 @@ public class CreateApplicationUserBean implements Serializable {
         encryptPassword();
         applicationUser = applicationUserDAO.save(applicationUser);
         activateAccountEJB.createActivateAccount(applicationUser);
-        FacesUtil.addInfoMessage("Medico adicionado com sucesso!");
+        FacesUtil.addInfoMessage("Funcionario adicionado com sucesso!");
         return "list?faces-redirect=true";
+    }
+
+    @ExceptionHandler
+    public void completeAddress() {
+        try {
+            CEP address = cepEJB.getAddress(applicationUser.getEmployee().getAddress().getZipCode());
+            AddressUtils.convertCepToAddress(address, applicationUser.getEmployee().getAddress());
+        } catch (Exception e) {
+            applicationUser.getEmployee().setAddress(new Address());
+            throw new RuntimeException("CEP invalido!");
+        }
     }
 
     private void verifyPassword() {

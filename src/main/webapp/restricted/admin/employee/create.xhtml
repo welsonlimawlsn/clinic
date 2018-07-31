@@ -1,0 +1,152 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/WEB-INF/templates/admin.xhtml"
+>
+    <ui:define name="content">
+        <f:metadata>
+            <f:viewAction action="#{createApplicationUserBean.initEmployee}"/>
+        </f:metadata>
+        <h1>Novo funcionario</h1>
+        <h:form>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <h:outputLabel for="fullName" value="Nome completo"/>
+                        <h:inputText styleClass="form-control"
+                                     value="#{createApplicationUserBean.applicationUser.employee.name}" required="true"
+                                     requiredMessage="O nome é obrigatório!" id="fullName"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <h:outputLabel for="cpf" value="CPF"/>
+                        <h:inputText styleClass="form-control"
+                                     value="#{createApplicationUserBean.applicationUser.employee.CPF}" required="true"
+                                     requiredMessage="O CPF é obrigatório!" id="cpf"
+                                     validator="#{validators.validateCpf}"
+                                     validatorMessage="CPF invalido!"/>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <h:outputLabel for="phone" value="Telefone"/>
+                        <h:inputText styleClass="form-control"
+                                     value="#{createApplicationUserBean.applicationUser.employee.phone}" required="true"
+                                     requiredMessage="O telefone é obrigatório!" id="phone"
+                                     validatorMessage="Telefone invalido!"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <h:outputLabel for="cep" value="CEP"/>
+                        <h:inputText styleClass="form-control"
+                                     value="#{createApplicationUserBean.applicationUser.employee.address.zipCode}" required="true"
+                                     maxlength="8"
+                                     requiredMessage="O CEP é obrigatório!" id="cep">
+                            <f:ajax event="blur" listener="#{createApplicationUserBean.completeAddress}"
+                                    render="addressgroup messages"/>
+                        </h:inputText>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <h:outputLabel for="number" value="Numero"/>
+                        <h:inputText styleClass="form-control"
+                                     value="#{createApplicationUserBean.applicationUser.employee.address.number}" required="true"
+                                     maxlength="8"
+                                     requiredMessage="O numero é obrigatório!" id="number"/>
+                    </div>
+                </div>
+            </div>
+            <h:panelGroup id="addressgroup">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <h:outputLabel for="addressinput" value="Endereço"/>
+                            <h:inputText value="#{createApplicationUserBean.applicationUser.employee.address.address}" id="addressinput"
+                                         requiredMessage="O endereço é obrigario" required="true"
+                                         styleClass="form-control" disabled="true"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <h:outputLabel for="complement" value="Complemento"/>
+                            <h:inputText value="#{createApplicationUserBean.applicationUser.employee.address.complement}" id="complement"
+                                         styleClass="form-control"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <h:outputLabel for="city" value="Cidade"/>
+                            <h:inputText value="#{createApplicationUserBean.applicationUser.employee.address.city}" id="city"
+                                         requiredMessage="A cidade é obrigaria" required="true"
+                                         styleClass="form-control" disabled="true"/>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <h:outputLabel for="district" value="Bairro"/>
+                            <h:inputText value="#{createApplicationUserBean.applicationUser.employee.address.district}" id="district"
+                                         styleClass="form-control" disabled="true"/>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <h:outputLabel for="state" value="Estado"/>
+                            <h:inputText value="#{createApplicationUserBean.applicationUser.employee.address.state}" id="state"
+                                         styleClass="form-control" disabled="true"/>
+                        </div>
+                    </div>
+                </div>
+            </h:panelGroup>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <h:outputLabel for="username" value="Usuario"/>
+                        <h:inputText styleClass="form-control"
+                                     value="#{createApplicationUserBean.applicationUser.username}" required="true"
+                                     requiredMessage="O usuario é obrigatório!" id="username"/>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <h:outputLabel for="email" value="E-mail"/>
+                        <h:inputText styleClass="form-control"
+                                     value="#{createApplicationUserBean.applicationUser.email}" required="true"
+                                     requiredMessage="O e-mail é obrigatório!" id="email"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <h:outputLabel for="password" value="Senha"/>
+                        <h:inputSecret styleClass="form-control"
+                                       value="#{createApplicationUserBean.applicationUser.password}" required="true"
+                                       requiredMessage="A senha é obrigatório!" id="password"/>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <h:outputLabel for="passwordAgain" value="A senha novamente"/>
+                        <h:inputSecret styleClass="form-control"
+                                       value="#{createApplicationUserBean.confirmationPassword}" required="true"
+                                       requiredMessage="Repita a senha por favor!" id="passwordAgain"/>
+                    </div>
+                </div>
+            </div>
+            <h:commandButton styleClass="btn btn-primary" value="Criar" action="#{createApplicationUserBean.save}"/>
+        </h:form>
+    </ui:define>
+</ui:composition>

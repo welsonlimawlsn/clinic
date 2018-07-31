@@ -1,0 +1,60 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/WEB-INF/templates/admin.xhtml"
+>
+    <ui:define name="content">
+        <f:metadata>
+            <f:viewAction action="#{listEmployeeBean.init}"/>
+        </f:metadata>
+        <h:form>
+            <div class="row" style="margin: 10px;">
+                <div class="col">
+                    <h:inputText styleClass="form-control" value="#{listEmployeeBean.searchField}"
+                                 title="Pesquisar por nome ou CPF"/>
+                </div>
+                <div class="col">
+                    <h:commandButton value="Pesquisar" styleClass="btn btn-primary">
+                        <f:ajax execute="@form" render="dataTableDoctors" listener="#{listEmployeeBean.search}"/>
+                    </h:commandButton>
+                </div>
+            </div>
+        </h:form>
+        <h:dataTable id="dataTableDoctors" styleClass="table table-striped" value="#{listEmployeeBean.employeeList}"
+                     var="employee">
+            <h:column>
+                <f:facet name="header">
+                    #
+                </f:facet>
+                <h:outputText value="#{employee.id}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    Nome
+                </f:facet>
+                <h:link outcome="detail" value="#{employee.name}">
+                    <f:param name="id" value="#{employee.id}"/>
+                </h:link>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    CPF
+                </f:facet>
+                <h:outputText value="#{employee.CPF}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    Telefone
+                </f:facet>
+                <h:outputText value="#{employee.phone}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    E-mail
+                </f:facet>
+                <h:outputText value="#{employee.applicationUser.email}"/>
+            </h:column>
+        </h:dataTable>
+    </ui:define>
+</ui:composition>

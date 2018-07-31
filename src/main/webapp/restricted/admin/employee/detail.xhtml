@@ -1,0 +1,121 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/WEB-INF/templates/admin.xhtml"
+>
+    <ui:define name="content">
+        <f:metadata>
+            <f:viewParam name="id" value="#{detailEmployeeBean.employeeId}" requiredMessage="Navegue até aqui pelo sistema!"/>
+            <f:viewAction action="#{detailEmployeeBean.init}"/>
+        </f:metadata>
+        <h1><h:outputText value="#{detailEmployeeBean.employee.name}"/></h1>
+        <h:form>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <h:outputText value="Nome completo"/>
+                        <h:outputText styleClass="form-control"
+                                      value="#{detailEmployeeBean.employee.name}"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <h:outputText value="CPF"/>
+                        <h:outputText styleClass="form-control"
+                                      value="#{detailEmployeeBean.employee.CPF}"/>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <h:outputText value="Telefone"/>
+                        <h:outputText styleClass="form-control"
+                                      value="#{detailEmployeeBean.employee.phone}"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <h:outputText value="CEP"/>
+                        <h:outputText styleClass="form-control" value="#{detailEmployeeBean.employee.address.zipCode}"
+                                      required="true"/>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <h:outputText value="Numero"/>
+                        <h:outputText styleClass="form-control"
+                                      value="#{detailEmployeeBean.employee.address.number}"/>
+                    </div>
+                </div>
+            </div>
+            <h:panelGroup id="addressgroup">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <h:outputText value="Endereço"/>
+                            <h:outputText value="#{detailEmployeeBean.employee.address.address}"
+                                          styleClass="form-control"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <h:outputText value="Complemento"/>
+                            <h:outputText value="#{detailEmployeeBean.employee.address.complement}"
+                                          styleClass="form-control"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <h:outputText value="Cidade"/>
+                            <h:outputText value="#{detailEmployeeBean.employee.address.city}"
+                                          styleClass="form-control"/>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <h:outputText value="Bairro"/>
+                            <h:outputText value="#{detailEmployeeBean.employee.address.district}"
+                                          styleClass="form-control"/>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <h:outputText value="Estado"/>
+                            <h:outputText value="#{detailEmployeeBean.employee.address.state}"
+                                          styleClass="form-control"/>
+                        </div>
+                    </div>
+                </div>
+            </h:panelGroup>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <h:outputText value="Usuario"/>
+                        <h:outputText styleClass="form-control"
+                                      value="#{detailEmployeeBean.employee.applicationUser.username}"/>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <h:outputText value="E-mail"/>
+                        <h:outputText styleClass="form-control"
+                                      value="#{detailEmployeeBean.employee.applicationUser.email}"/>
+                    </div>
+                </div>
+            </div>
+
+            <h:link outcome="edit" styleClass="btn btn-primary" value="Editar">
+                <f:param name="id" value="#{detailEmployeeBean.employeeId}"/>
+            </h:link>
+        </h:form>
+    </ui:define>
+</ui:composition>
