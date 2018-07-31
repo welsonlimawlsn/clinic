@@ -1,9 +1,7 @@
 package br.com.welson.clinic.persistence.model;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class ApplicationUser extends AbstractEntity {
@@ -22,6 +20,8 @@ public class ApplicationUser extends AbstractEntity {
     private Patient patient;
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Admin admin;
+    @OneToMany(mappedBy = "applicationUser", cascade = {CascadeType.MERGE})
+    private List<ActivateAccount> activateAccount;
 
     public String getUsername() {
         return username;
@@ -77,5 +77,13 @@ public class ApplicationUser extends AbstractEntity {
 
     public void setAdmin(Admin admin) {
         this.admin = admin;
+    }
+
+    public List<ActivateAccount> getActivateAccount() {
+        return activateAccount;
+    }
+
+    public void setActivateAccount(List<ActivateAccount> activateAccount) {
+        this.activateAccount = activateAccount;
     }
 }

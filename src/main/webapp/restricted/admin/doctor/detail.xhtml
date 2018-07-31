@@ -1,0 +1,70 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:g="http://java.sun.com/jsf/html"
+                template="/WEB-INF/templates/admin.xhtml"
+>
+    <ui:define name="content">
+        <f:metadata>
+            <f:viewParam name="id" value="#{detailDoctorBean.doctorId}" required="true" requiredMessage="Navegue até aqui pelo sistema"/>
+            <f:viewAction action="#{detailDoctorBean.init}"/>
+        </f:metadata>
+        <h1><h:outputText value="Dr.(a) #{detailDoctorBean.applicationUser.doctor.name}"/></h1>
+        <h:form>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <h:outputText value="Nome completo"/>
+                        <h:outputText styleClass="form-control"
+                                     value="#{detailDoctorBean.applicationUser.doctor.name}" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <h:outputText value="CPF"/>
+                        <h:outputText styleClass="form-control"
+                                     value="#{detailDoctorBean.applicationUser.doctor.CPF}"/>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <h:outputText value="Telefone"/>
+                        <h:outputText styleClass="form-control"
+                                     value="#{detailDoctorBean.applicationUser.doctor.phone}"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <h:outputText value="CMR"/>
+                        <h:outputText styleClass="form-control"
+                                     value="#{detailDoctorBean.applicationUser.doctor.CRM}"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <h:outputText value="Usuario"/>
+                        <h:outputText styleClass="form-control"
+                                     value="#{detailDoctorBean.applicationUser.username}"/>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <h:outputText value="E-mail"/>
+                        <h:outputText styleClass="form-control"
+                                     value="#{detailDoctorBean.applicationUser.email}"/>
+                    </div>
+                </div>
+            </div>
+            <h:link outcome="edit" styleClass="btn btn-primary" value="Editar">
+                <f:param name="id" value="#{detailDoctorBean.doctorId}"/>
+            </h:link>
+        </h:form>
+    </ui:define>
+</ui:composition>

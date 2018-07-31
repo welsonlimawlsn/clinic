@@ -1,22 +1,27 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:h="http://xmlns.jcp.org/jsf/html"
-                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                xmlns:f="http://xmlns.jcp.org/jsf/core"
-                xmlns:g="http://java.sun.com/jsf/html"
-                template="/WEB-INF/templates/admin.xhtml"
->
-    <ui:define name="content">
-        <f:metadata>
-            <f:viewAction action="#{createClinicBean.init}"/>
-        </f:metadata>
-        <h1>Criar uma nova clinica</h1>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+          integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous"/>
+    <title>Configure</title>
+</h:head>
+<h:body>
+    <f:metadata>
+        <f:viewAction action="#{configureClinicBean.init}"/>
+    </f:metadata>
+    <div class="container">
+        <h1>Configurar uma nova clinica</h1>
         <h:form>
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
                         <h:outputLabel for="name" value="Nome"/>
                         <h:inputText styleClass="form-control"
-                                     value="#{createClinicBean.clinic.name}" required="true"
+                                     value="#{configureClinicBean.clinic.name}" required="true"
                                      requiredMessage="O nome é obrigatório!" id="name"/>
                     </div>
                 </div>
@@ -26,7 +31,7 @@
                     <div class="form-group">
                         <h:outputLabel for="cnpj" value="CNPJ"/>
                         <h:inputText styleClass="form-control"
-                                     value="#{createClinicBean.clinic.CNPJ}" required="true"
+                                     value="#{configureClinicBean.clinic.CNPJ}" required="true"
                                      requiredMessage="O CNPJ é obrigatório!" id="cnpj"
                                      validator="#{validators.validateCnpj}"
                                      validatorMessage="CNPJ invalido!"/>
@@ -36,7 +41,7 @@
                     <div class="form-group">
                         <h:outputLabel for="phone" value="Telefone"/>
                         <h:inputText styleClass="form-control"
-                                     value="#{createClinicBean.clinic.phone}" required="true"
+                                     value="#{configureClinicBean.clinic.phone}" required="true"
                                      requiredMessage="O telefone é obrigatório!" id="phone"/>
                     </div>
                 </div>
@@ -46,7 +51,7 @@
                     <div class="form-group">
                         <h:outputLabel for="email" value="E-mail"/>
                         <h:inputText styleClass="form-control"
-                                     value="#{createClinicBean.clinic.email}" required="true"
+                                     value="#{configureClinicBean.clinic.email}" required="true"
                                      requiredMessage="O e-mail é obrigatório!" id="email"/>
                     </div>
                 </div>
@@ -57,10 +62,10 @@
                     <div class="form-group">
                         <h:outputLabel for="cep" value="CEP"/>
                         <h:inputText styleClass="form-control"
-                                     value="#{createClinicBean.clinic.address.zipCode}" required="true"
+                                     value="#{configureClinicBean.clinic.address.zipCode}" required="true"
                                      maxlength="8"
                                      requiredMessage="O CEP é obrigatório!" id="cep">
-                            <f:ajax event="blur" listener="#{createClinicBean.completeAddress}"
+                            <f:ajax event="blur" listener="#{configureClinicBean.completeAddress}"
                                     render="addressgroup messages"/>
                         </h:inputText>
                     </div>
@@ -69,7 +74,7 @@
                     <div class="form-group">
                         <h:outputLabel for="number" value="Numero"/>
                         <h:inputText styleClass="form-control"
-                                     value="#{createClinicBean.clinic.address.number}" required="true"
+                                     value="#{configureClinicBean.clinic.address.number}" required="true"
                                      maxlength="8"
                                      requiredMessage="O numero é obrigatório!" id="number"/>
                     </div>
@@ -80,15 +85,16 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <h:outputLabel for="addressinput" value="Endereço"/>
-                            <h:inputText value="#{createClinicBean.clinic.address.address}" id="addressinput"
-                                         requiredMessage="O endereço é obrigario" required="true" styleClass="form-control" disabled="true"/>
+                            <h:inputText value="#{configureClinicBean.clinic.address.address}" id="addressinput"
+                                         requiredMessage="O endereço é obrigario" required="true"
+                                         styleClass="form-control" disabled="true"/>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <h:outputLabel for="complement" value="Complemento"/>
-                            <h:inputText value="#{createClinicBean.clinic.address.complement}" id="complement"
-                                          styleClass="form-control"/>
+                            <h:inputText value="#{configureClinicBean.clinic.address.complement}" id="complement"
+                                         styleClass="form-control"/>
                         </div>
                     </div>
                 </div>
@@ -97,28 +103,39 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <h:outputLabel for="city" value="Cidade"/>
-                            <h:inputText value="#{createClinicBean.clinic.address.city}" id="city"
-                                         requiredMessage="A cidade é obrigaria" required="true" styleClass="form-control" disabled="true"/>
+                            <h:inputText value="#{configureClinicBean.clinic.address.city}" id="city"
+                                         requiredMessage="A cidade é obrigaria" required="true"
+                                         styleClass="form-control" disabled="true"/>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <h:outputLabel for="district" value="Bairro"/>
-                            <h:inputText value="#{createClinicBean.clinic.address.district}" id="district"
-                                          styleClass="form-control" disabled="true"/>
+                            <h:inputText value="#{configureClinicBean.clinic.address.district}" id="district"
+                                         styleClass="form-control" disabled="true"/>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <h:outputLabel for="state" value="Estado"/>
-                            <h:inputText value="#{createClinicBean.clinic.address.state}" id="state"
-                                          styleClass="form-control" disabled="true"/>
+                            <h:inputText value="#{configureClinicBean.clinic.address.state}" id="state"
+                                         styleClass="form-control" disabled="true"/>
                         </div>
                     </div>
                 </div>
             </h:panelGroup>
 
-            <h:commandButton styleClass="btn btn-primary" value="Criar" actionListener="#{createClinicBean.save}"/>
+            <h:commandButton styleClass="btn btn-primary" value="Configurar" action="#{configureClinicBean.save}"/>
         </h:form>
-    </ui:define>
-</ui:composition>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+            integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+            crossorigin="anonymous"></script>
+</h:body>
+</html>

@@ -22,33 +22,24 @@ import java.io.Serializable;
 public class EditClinicBean implements Serializable {
 
     private Clinic clinic;
-    private Long id;
     @Inject
     private DAO<Clinic> clinicDAO;
+    @Inject
+    private ClinicBean clinicBean;
     @EJB
     private CepEJB cepEJB;
 
     public void init() {
-        clinic = clinicDAO.getById(id);
-        if (clinic == null) {
-            ContextUtils.redirect("/404.xhtml");
-        }
+        clinic = clinicBean.getClinic();
     }
 
     @Transactional
     @ExceptionHandler
     public String save() {
         clinicDAO.update(clinic);
+        clinicBean.init();
         FacesUtil.addInfoMessage(clinic.getName() + " alterada com sucesso!");
-        return "detail.xhtml?faces-redirect=true&id=" + id;
-    }
-
-    @Transactional
-    @ExceptionHandler
-    public String remove() {
-        clinicDAO.delete(clinic);
-        FacesUtil.addInfoMessage(clinic.getName() + " deletada com sucesso!");
-        return "list.xhtml?faces-redirect=true";
+        return "detail.xhtml?faces-redirect=true";
     }
 
     @ExceptionHandler
@@ -68,13 +59,5 @@ public class EditClinicBean implements Serializable {
 
     public void setClinic(Clinic clinic) {
         this.clinic = clinic;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 }

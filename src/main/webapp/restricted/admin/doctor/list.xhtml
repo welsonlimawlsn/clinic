@@ -2,51 +2,64 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
-                xmlns:g="http://java.sun.com/jsf/html"
                 template="/WEB-INF/templates/admin.xhtml"
 >
     <ui:define name="content">
         <f:metadata>
-            <f:viewAction action="#{listClinicBean.init}"/>
+            <f:viewAction action="#{listDoctorBean.init}"/>
         </f:metadata>
         <h:form>
             <div class="row" style="margin: 10px;">
                 <div class="col">
-                    <h:inputText styleClass="form-control" value="#{listClinicBean.searchField}"/>
+                    <h:inputText styleClass="form-control" value="#{listDoctorBean.searchField}"
+                                 placeholder="nome, cpf ou crm"/>
                 </div>
                 <div class="col">
-                    <h:commandButton value="Pesquisar" styleClass="btn btn-primary" actionListener="#{listClinicBean.search}">
-                        <f:ajax listener="#{listClinicBean.search}" execute="@form" render="dataTableClinics"/>
+                    <h:commandButton value="Pesquisar" styleClass="btn btn-primary">
+                        <f:ajax execute="@form" render="dataTableDoctors" listener="#{listDoctorBean.search}"/>
                     </h:commandButton>
                 </div>
             </div>
         </h:form>
-        <h:dataTable id="dataTableClinics" styleClass="table table-striped" value="#{listClinicBean.clinics}" var="clinic">
+        <h:dataTable id="dataTableDoctors" styleClass="table table-striped" value="#{listDoctorBean.doctorList}"
+                     var="doctor">
             <h:column>
                 <f:facet name="header">
                     #
                 </f:facet>
-                <h:outputText value="#{clinic.id}"/>
+                <h:outputText value="#{doctor.id}"/>
             </h:column>
             <h:column>
                 <f:facet name="header">
                     Nome
                 </f:facet>
-                <h:link outcome="detail.xhtml" value="#{clinic.name}">
-                    <f:param name="id" value="#{clinic.id}"/>
+                <h:link outcome="detail" value="#{doctor.name}">
+                    <f:param name="id" value="#{doctor.id}"/>
                 </h:link>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    CPF
+                </f:facet>
+                <h:outputText value="#{doctor.CPF}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    CMR
+                </f:facet>
+                <h:outputText value="#{doctor.CRM}"/>
             </h:column>
             <h:column>
                 <f:facet name="header">
                     Telefone
                 </f:facet>
-                <h:outputText value="#{clinic.phone}"/>
+                <h:outputText value="#{doctor.phone}"/>
             </h:column>
             <h:column>
                 <f:facet name="header">
                     E-mail
                 </f:facet>
-                <h:outputText value="#{clinic.email}"/>
+                <h:outputText value="#{doctor.applicationUser.email}"/>
             </h:column>
         </h:dataTable>
     </ui:define>

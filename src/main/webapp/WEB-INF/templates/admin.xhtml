@@ -13,7 +13,7 @@
 <h:body>
     <div id="header">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <h:link styleClass="navbar-brand" outcome="/restricted/admin/index.xhtml" value="Grades"/>
+            <h:link styleClass="navbar-brand" outcome="/restricted/admin/index.xhtml" value="#{clinicBean.clinic.name}"/>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -27,22 +27,32 @@
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Administradores
+                            Medicos
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <h:link outcome="/restricted/admin/create.xhtml" value="Novo" styleClass="dropdown-item"/>
-                            <h:link outcome="/restricted/admin/update.xhtml" value="Alterar meu perfil" styleClass="dropdown-item"/>
-                            <h:link outcome="/restricted/admin/update-password.xhtml" value="Mudar a senha" styleClass="dropdown-item"/>
+                            <h:link outcome="/restricted/admin/doctor/create.xhtml" value="Novo" styleClass="dropdown-item"/>
+                            <h:link outcome="/restricted/admin/doctor/list.xhtml" value="Todos os medicos" styleClass="dropdown-item"/>
                         </div>
                     </li>
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Clinicas
+                            Administradores
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <h:link outcome="/restricted/admin/clinic/create.xhtml" value="Nova" styleClass="dropdown-item"/>
-                            <h:link outcome="/restricted/admin/clinic/list.xhtml" value="Todas" styleClass="dropdown-item"/>
+                            <h:link outcome="/restricted/admin/create.xhtml" value="Novo" styleClass="dropdown-item"/>
+                            <h:link outcome="/restricted/admin/update.xhtml" value="Alterar o meu perfil" styleClass="dropdown-item"/>
+                            <h:link outcome="/restricted/admin/update-password.xhtml" value="Mudar a minha senha" styleClass="dropdown-item"/>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Clinica
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <h:link outcome="/restricted/admin/clinic/edit.xhtml" value="Editar" styleClass="dropdown-item"/>
+                            <h:link outcome="/restricted/admin/clinic/detail.xhtml" value="Sobre" styleClass="dropdown-item"/>
                         </div>
                     </li>
                 </ul>

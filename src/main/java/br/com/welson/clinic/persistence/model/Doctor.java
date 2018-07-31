@@ -1,8 +1,6 @@
 package br.com.welson.clinic.persistence.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 public class Doctor extends AbstractEntity {
@@ -15,8 +13,8 @@ public class Doctor extends AbstractEntity {
     private String CPF;
     @Column(nullable = false)
     private String phone;
-    @ManyToOne(optional = false)
-    private Clinic clinic;
+    @OneToOne(mappedBy = "doctor", cascade = {CascadeType.MERGE})
+    private ApplicationUser applicationUser;
 
     public String getName() {
         return name;
@@ -50,11 +48,11 @@ public class Doctor extends AbstractEntity {
         this.phone = phone;
     }
 
-    public Clinic getClinic() {
-        return clinic;
+    public ApplicationUser getApplicationUser() {
+        return applicationUser;
     }
 
-    public void setClinic(Clinic clinic) {
-        this.clinic = clinic;
+    public void setApplicationUser(ApplicationUser applicationUser) {
+        this.applicationUser = applicationUser;
     }
 }

@@ -18,15 +18,20 @@ import java.io.Serializable;
 
 @Named
 @ViewScoped
-public class CreateClinicBean implements Serializable {
+public class ConfigureClinicBean implements Serializable {
 
     @Inject
     private DAO<Clinic> clinicDAO;
+    @Inject
+    private ClinicBean clinicBean;
     private Clinic clinic;
     @EJB
     private CepEJB cepEJB;
 
     public void init() {
+        if(clinicBean.getClinic() != null) {
+            FacesUtil.redirectTo("/restricted/admin/index.xhtml");
+        }
         clinic = new Clinic();
         clinic.setAddress(new Address());
     }
@@ -35,9 +40,9 @@ public class CreateClinicBean implements Serializable {
     @ExceptionHandler
     public String save() {
         clinicDAO.save(clinic);
-        FacesUtil.addInfoMessage("Clinica criada com sucesso!");
-        init();
-        return "save?faces-redirect=true";
+        FacesUtil.addInfoMessage("Clinica configurada com sucesso!");
+        clinicBean.init();
+        return "/restricted/admin/index?faces-redirect=true";
     }
 
     @ExceptionHandler

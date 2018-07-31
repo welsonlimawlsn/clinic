@@ -6,6 +6,8 @@ import br.com.welson.clinic.ejb.ActivateAccountEJB;
 import br.com.welson.clinic.persistence.dao.DAO;
 import br.com.welson.clinic.persistence.model.Admin;
 import br.com.welson.clinic.persistence.model.ApplicationUser;
+import br.com.welson.clinic.persistence.model.Clinic;
+import br.com.welson.clinic.persistence.model.Doctor;
 import br.com.welson.clinic.utils.CryptographyUtil;
 import br.com.welson.clinic.utils.FacesUtil;
 
@@ -33,6 +35,11 @@ public class CreateApplicationUserBean implements Serializable {
         applicationUser.setAdmin(new Admin());
     }
 
+    public void initDoctor() {
+        applicationUser = new ApplicationUser();
+        applicationUser.setDoctor(new Doctor());
+    }
+
     public ApplicationUser getApplicationUser() {
         return applicationUser;
     }
@@ -56,8 +63,8 @@ public class CreateApplicationUserBean implements Serializable {
         encryptPassword();
         applicationUser = applicationUserDAO.save(applicationUser);
         activateAccountEJB.createActivateAccount(applicationUser);
-        FacesUtil.addInfoMessage("Usuário adicionado com sucesso!");
-        return "save?faces-redirect=true";
+        FacesUtil.addInfoMessage("Medico adicionado com sucesso!");
+        return "list?faces-redirect=true";
     }
 
     private void verifyPassword() {
