@@ -5,16 +5,16 @@ import java.time.Duration;
 import java.util.List;
 
 @Entity
-public class Surgery extends AbstractEntity {
+public class Consultation extends AbstractEntity{
 
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)
-    private Duration estimatedDuration;
-    @Column(nullable = false)
+    private Duration duration;
+    @Column(nullable = false, precision = 2)
     private Double price;
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(joinColumns = @JoinColumn(name = "surgery_id"), inverseJoinColumns = @JoinColumn(name = "doctor_id"))
+    @JoinTable(joinColumns = @JoinColumn(name = "consultation_id"), inverseJoinColumns = @JoinColumn(name = "doctor_id"))
     private List<Doctor> doctorList;
 
     public String getName() {
@@ -25,12 +25,12 @@ public class Surgery extends AbstractEntity {
         this.name = name;
     }
 
-    public Duration getEstimatedDuration() {
-        return estimatedDuration;
+    public Duration getDuration() {
+        return duration;
     }
 
-    public void setEstimatedDuration(Duration estimatedDuration) {
-        this.estimatedDuration = estimatedDuration;
+    public void setDuration(Duration duration) {
+        this.duration = duration;
     }
 
     public Double getPrice() {

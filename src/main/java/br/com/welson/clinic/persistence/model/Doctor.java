@@ -1,6 +1,7 @@
 package br.com.welson.clinic.persistence.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Doctor extends AbstractEntity {
@@ -15,6 +16,10 @@ public class Doctor extends AbstractEntity {
     private String phone;
     @OneToOne(mappedBy = "doctor", cascade = {CascadeType.MERGE})
     private ApplicationUser applicationUser;
+    @ManyToMany(mappedBy = "doctorList")
+    private List<Consultation> consultationList;
+    @ManyToMany(mappedBy = "doctorList")
+    private List<Surgery> surgeryList;
 
     public String getName() {
         return name;
@@ -54,5 +59,21 @@ public class Doctor extends AbstractEntity {
 
     public void setApplicationUser(ApplicationUser applicationUser) {
         this.applicationUser = applicationUser;
+    }
+
+    public List<Consultation> getConsultationList() {
+        return consultationList;
+    }
+
+    public void setConsultationList(List<Consultation> consultationList) {
+        this.consultationList = consultationList;
+    }
+
+    public List<Surgery> getSurgeryList() {
+        return surgeryList;
+    }
+
+    public void setSurgeryList(List<Surgery> surgeryList) {
+        this.surgeryList = surgeryList;
     }
 }
