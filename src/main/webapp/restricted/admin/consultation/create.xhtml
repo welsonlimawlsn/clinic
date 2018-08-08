@@ -1,0 +1,77 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/WEB-INF/templates/admin.xhtml"
+>
+    <ui:define name="content">
+        <f:metadata>
+            <f:viewAction action="#{createConsultationBean.init}"/>
+        </f:metadata>
+        <h1>Criar uma nova consulta</h1>
+        <h:form>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <h:outputLabel for="name" value="Nome completo"/>
+                        <h:inputText styleClass="form-control"
+                                     value="#{createConsultationBean.consultation.name}" required="true"
+                                     requiredMessage="O nome é obrigatório!" id="name"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <h:outputLabel for="duration" value="Duração em minutos"/>
+                        <h:inputText styleClass="form-control"
+                                     value="#{createConsultationBean.durationInMinutes}" required="true"
+                                     requiredMessage="A duração é obrigatória!" id="duration"/>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <h:outputLabel for="price" value="Preço: "/>
+                        <h:inputText styleClass="form-control"
+                                     value="#{createConsultationBean.consultation.price}" required="true"
+                                     requiredMessage="A preço é obrigatório" id="price">
+                            <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
+                        </h:inputText>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <h:outputLabel value="Escolhas os medicos aptos a fazer esta consulta: "/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <h:outputLabel value="Todos os medicos"/>
+                    <h:selectOneListbox value="#{createConsultationBean.selectedFrom}"
+                                        style="min-height: 120px;" styleClass="form-control"
+                                        converter="#{doctorConverter}">
+                        <f:selectItems value="#{createConsultationBean.doctorList}" var="consultation" itemValue="#{consultation}"
+                                       itemLabel="#{consultation.name}"/>
+                        <f:ajax render="@form" execute="@form" event="dblclick"
+                                listener="#{createConsultationBean.addFromTo}"/>
+                    </h:selectOneListbox>
+                </div>
+                <div class="col-md-6 form-group">
+                    <h:outputLabel value="Medicos aptos"/>
+                    <h:selectOneListbox value="#{createConsultationBean.selectedTo}" style="min-height: 120px;"
+                                        styleClass="form-control"
+                                        converter="#{doctorConverter}">
+                        <f:selectItems value="#{createConsultationBean.consultation.doctorList}" var="doctor"
+                                       itemValue="#{consultation}" itemLabel="#{consultation.name}"/>
+                        <f:ajax render="@form" execute="@form" event="dblclick"
+                                listener="#{createConsultationBean.addToFrom}"/>
+                    </h:selectOneListbox>
+                </div>
+            </div>
+
+            <h:commandButton styleClass="btn btn-primary" value="Criar" action="#{createConsultationBean.save}"/>
+        </h:form>
+    </ui:define>
+</ui:composition>

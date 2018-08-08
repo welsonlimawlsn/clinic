@@ -13,7 +13,6 @@ public class Consultation extends AbstractEntity{
     private Duration duration;
     @Column(nullable = false, precision = 2)
     private Double price;
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(joinColumns = @JoinColumn(name = "consultation_id"), inverseJoinColumns = @JoinColumn(name = "doctor_id"))
     private List<Doctor> doctorList;
 

@@ -22,44 +22,44 @@
             </div>
         </h:form>
         <h:dataTable id="dataTableDoctors" styleClass="table table-striped" value="#{listDoctorBean.doctorList}"
-                     var="doctor">
+                     var="consultation">
             <h:column>
                 <f:facet name="header">
                     #
                 </f:facet>
-                <h:outputText value="#{doctor.id}"/>
+                <h:outputText value="#{consultation.id}"/>
             </h:column>
             <h:column>
                 <f:facet name="header">
                     Nome
                 </f:facet>
-                <h:link outcome="detail" value="#{doctor.name}">
-                    <f:param name="id" value="#{doctor.id}"/>
+                <h:link outcome="detail" value="#{consultation.name}">
+                    <f:param name="id" value="#{consultation.id}"/>
                 </h:link>
             </h:column>
             <h:column>
                 <f:facet name="header">
                     CPF
                 </f:facet>
-                <h:outputText value="#{doctor.CPF}"/>
+                <h:outputText value="#{consultation.CPF}"/>
             </h:column>
             <h:column>
                 <f:facet name="header">
                     CMR
                 </f:facet>
-                <h:outputText value="#{doctor.CRM}"/>
+                <h:outputText value="#{consultation.CRM}"/>
             </h:column>
             <h:column>
                 <f:facet name="header">
                     Telefone
                 </f:facet>
-                <h:outputText value="#{doctor.phone}"/>
+                <h:outputText value="#{consultation.phone}"/>
             </h:column>
             <h:column>
                 <f:facet name="header">
                     E-mail
                 </f:facet>
-                <h:outputText value="#{doctor.applicationUser.email}"/>
+                <h:outputText value="#{consultation.applicationUser.email}"/>
             </h:column>
         </h:dataTable>
     </ui:define>

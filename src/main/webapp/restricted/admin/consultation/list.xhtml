@@ -1,0 +1,44 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/WEB-INF/templates/admin.xhtml"
+>
+    <ui:define name="content">
+        <f:metadata>
+            <f:viewAction action="#{listConsultationBean.init}"/>
+        </f:metadata>
+        <h1>Todas as consultas</h1>
+        <h:dataTable id="dataTableDoctors" styleClass="table table-striped" value="#{listConsultationBean.consultationList}"
+                     var="consultation">
+            <h:column>
+                <f:facet name="header">
+                    #
+                </f:facet>
+                <h:outputText value="#{consultation.id}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    Nome
+                </f:facet>
+                <h:link value="#{consultation.name}" outcome="detail">
+                    <f:param name="consultationId" value="#{consultation.id}"/>
+                </h:link>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    Duração
+                </f:facet>
+                <h:outputText value="#{listConsultationBean.getTimeFromDuration(consultation)}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    Preço
+                </f:facet>
+                <h:outputText value="#{consultation.price}">
+                    <f:convertNumber type="currency" locale="pt-BR"/>
+                </h:outputText>
+            </h:column>
+        </h:dataTable>
+    </ui:define>
+</ui:composition>
